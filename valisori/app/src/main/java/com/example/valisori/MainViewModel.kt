@@ -8,6 +8,7 @@ class MainViewModel(application:Application) : AndroidViewModel(application) {
     val inputText = MutableLiveData("")
     val onInputButtonClicked = MutableLiveData(false)
 
+
     fun onClickInputButton() {
         onInputButtonClicked.value = true
     }
