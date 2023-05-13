@@ -1,0 +1,2 @@
+DATABASE URL: https://valisori-72068-default-rtdb.firebaseio.com
+WEB API KEI: AIzaSyCiyx86AFTnFwPkjNnI9CIhbG_iov6HuR8
