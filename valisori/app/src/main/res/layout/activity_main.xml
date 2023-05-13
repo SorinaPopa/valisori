@@ -26,7 +26,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toRightOf="@id/voiceButton"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/userInputText" />
+            app:layout_constraintTop_toBottomOf="@+id/userInputText"
+            app:layout_constraintVertical_bias="0.184" />
 
         <Button
             android:id="@+id/voiceButton"
@@ -37,7 +38,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toLeftOf="@id/inputButton"
-            app:layout_constraintTop_toBottomOf="@+id/userInputText" />
+            app:layout_constraintTop_toBottomOf="@+id/userInputText"
+            app:layout_constraintVertical_bias="0.184" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/userInputText"
@@ -47,8 +49,10 @@
             android:hint="User Input"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.527"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.405">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
