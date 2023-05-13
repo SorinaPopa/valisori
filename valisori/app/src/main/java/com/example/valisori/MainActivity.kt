@@ -31,26 +31,27 @@ class MainActivity : AppCompatActivity() {
 //            getString(R.string.shared_preference_organiser), Context.MODE_PRIVATE
 //        )
 //        subscribeToObserver()
-        openKeyboardObserver()
+        sendDataToFirebaseObserver()
     }
 
-    private fun openKeyboardObserver() {
+    private fun sendDataToFirebaseObserver() {
         //initialise Firebase database and reference
         val database = FirebaseDatabase.getInstance()
         val timestamp = System.currentTimeMillis().toString()
         val myRef = database.getReference("data").child(timestamp)
+
         mainViewModel.onInputButtonClicked.observe(this) { value ->
             if (value) {
-//                val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-//                imm.showSoftInput(userInput, InputMethodManager.SHOW_IMPLICIT)
-//                finish()
-
-
-                myRef.setValue("Send!")
-                Toast.makeText(this, "Data pushed to server with timestamp $timestamp", Toast.LENGTH_LONG).show()
-
+                val data = userInput.editText?.text.toString().trim()
+                if (data.isNotEmpty()) {
+                    val timestamp = System.currentTimeMillis().toString()
+                    val childRef = myRef.child(timestamp)
+                    childRef.setValue(data)
+                    Toast.makeText(this, "Data pushed to server with timestamp $timestamp", Toast.LENGTH_LONG).show()
+                } else {
+                    Toast.makeText(this, "Please enter data", Toast.LENGTH_LONG).show()
+                }
             }
         }
     }
-
 }
