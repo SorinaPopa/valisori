@@ -1,7 +1,7 @@
 import pyrebase
 import RPi.GPIO as GPIO
 
-RED_PIN = 17
+RED_PIN = 15
 GREEN_PIN = 18
 BLUE_PIN = 27
 
@@ -21,23 +21,21 @@ GPIO.setup(RED_PIN, GPIO.OUT)
 GPIO.setup(GREEN_PIN, GPIO.OUT)
 GPIO.setup(BLUE_PIN, GPIO.OUT)
 
-def set_color(color):
-    r, g, b = color
+def set_color(r,g,b):
     GPIO.output(RED_PIN, r)
     GPIO.output(GREEN_PIN, g)
     GPIO.output(BLUE_PIN, b)
 
 def stream_handler(message):
+    print("intra in functie")
+    print(message)
     if message["event"] == "put":
-        if message["path"] == "/resulting_color/color":
-            color = message["data"]
-            set_color(color)
+        if message["path"] == "/":
+            print(message["data"])
+            r,g,b = message["data"]["value"]
+            print(r,g,b)
+            set_color(r,g,b)
 
-my_stream = db.child("resulting_color").stream(stream_handler)
+my_stream = db.child("colors").stream(stream_handler)
 
-try:
-    while True:
-        pass
-except KeyboardInterrupt:
-    my_stream.close()
-    GPIO.cleanup()
+print("face ceva")
