@@ -1,3 +1,4 @@
+
 import pyrebase
 import RPi.GPIO as GPIO
 
@@ -21,21 +22,26 @@ GPIO.setup(RED_PIN, GPIO.OUT)
 GPIO.setup(GREEN_PIN, GPIO.OUT)
 GPIO.setup(BLUE_PIN, GPIO.OUT)
 
+red_pwm = GPIO.PWM(RED_PIN, 100)
+green_pwm = GPIO.PWM(GREEN_PIN, 100)
+blue_pwm = GPIO.PWM(BLUE_PIN, 100)
+
+red_pwm.start(0)
+green_pwm.start(0)
+blue_pwm.start(0)
+
 def set_color(r,g,b):
-    GPIO.output(RED_PIN, r)
-    GPIO.output(GREEN_PIN, g)
-    GPIO.output(BLUE_PIN, b)
+    red_pwm.ChangeDutyCycle(100)
+    green_pwm.ChangeDutyCycle(g*100/255)
+    blue_pwm.ChangeDutyCycle(b*100/255)
 
 def stream_handler(message):
     print("intra in functie")
     print(message)
     if message["event"] == "put":
         if message["path"] == "/":
-            print(message["data"])
             r,g,b = message["data"]["value"]
             print(r,g,b)
             set_color(r,g,b)
 
 my_stream = db.child("colors").stream(stream_handler)
-
-print("face ceva")
