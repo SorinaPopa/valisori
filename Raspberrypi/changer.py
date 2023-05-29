@@ -1,9 +1,9 @@
 import pyrebase
 import RPi.GPIO as GPIO
 
-RED_PIN = 15
-GREEN_PIN = 18
-BLUE_PIN = 27
+RED_PIN = 17
+GREEN_PIN = 27
+BLUE_PIN = 22
 
 config = {
     "apiKey": "your_api_key",
@@ -30,8 +30,6 @@ def set_color(r, g, b):
     blue_pwm.start(b * 100 / 255)
 
 def stream_handler(message):
-    print("Intra in functie")
-    print(message)
     if message["event"] == "put":
         if message["path"] == "/":
             r, g, b = message["data"]["value"]
