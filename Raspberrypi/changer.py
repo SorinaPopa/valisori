@@ -17,23 +17,14 @@ firebase = pyrebase.initialize_app(config)
 db = firebase.database()
 
 GPIO.setmode(GPIO.BCM)
-GPIO.setwarnings(False)
 GPIO.setup(RED_PIN, GPIO.OUT)
 GPIO.setup(GREEN_PIN, GPIO.OUT)
 GPIO.setup(BLUE_PIN, GPIO.OUT)
 
-red_pwm = GPIO.PWM(RED_PIN, 100)
-green_pwm = GPIO.PWM(GREEN_PIN, 100)
-blue_pwm = GPIO.PWM(BLUE_PIN, 100)
-
-red_pwm.start(0)
-green_pwm.start(0)
-blue_pwm.start(0)
-
 def set_color(r,g,b):
-    red_pwm.ChangeDutyCycle(100)
-    green_pwm.ChangeDutyCycle(g*100/255)
-    blue_pwm.ChangeDutyCycle(b*100/255)
+    GPIO.output(red_pin, r)
+    GPIO.output(green_pin, g)
+    GPIO.output(blue_pin, b)
 
 def stream_handler(message):
     print("intra in functie")
@@ -42,6 +33,6 @@ def stream_handler(message):
         if message["path"] == "/":
             r,g,b = message["data"]["value"]
             print(r,g,b)
-            set_color(r,g,b)
-
+            set_color(r/255, g/255, b/255)
+            
 my_stream = db.child("colors").stream(stream_handler)
