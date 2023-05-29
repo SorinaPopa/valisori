@@ -26,9 +26,9 @@ green_pwm = GPIO.PWM(GREEN_PIN, 100)
 blue_pwm = GPIO.PWM(BLUE_PIN, 100)
 
 def set_color(r,g,b):
-    red_pwm.start(red)
-    green_pwm.start(green)
-    blue_pwm.start(blue)
+    red_pwm.start(r)
+    green_pwm.start(g)
+    blue_pwm.start(b)
 
 def stream_handler(message):
     print("intra in functie")
@@ -39,11 +39,9 @@ def stream_handler(message):
             print(r,g,b)
             set_color(r, g, b)
             
-            
+my_stream = db.child("colors").stream(stream_handler)
+
 while True:
-    try:
-        my_stream = db.child("colors").stream(stream_handler)
-        
     except KeyboardInterrupt:
         GPIO.cleanup()
         break
