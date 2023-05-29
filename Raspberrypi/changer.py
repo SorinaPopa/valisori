@@ -26,9 +26,9 @@ green_pwm = GPIO.PWM(GREEN_PIN, 100)
 blue_pwm = GPIO.PWM(BLUE_PIN, 100)
 
 def set_color(r,g,b):
-    red_pwm.start(r)
-    green_pwm.start(g)
-    blue_pwm.start(b)
+    red_pwm.start(r*100/255)
+    green_pwm.start(g*100/255)
+    blue_pwm.start(b*100/255)
 
 def stream_handler(message):
     print("intra in functie")
