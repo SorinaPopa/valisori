@@ -41,7 +41,9 @@ def stream_handler(message):
             
 my_stream = db.child("colors").stream(stream_handler)
 
-while True:
-    except KeyboardInterrupt:
-        GPIO.cleanup()
-        break
+try:
+    while True:
+        pass
+
+except KeyboardInterrupt:
+    GPIO.cleanup()
