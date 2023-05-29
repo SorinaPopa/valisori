@@ -22,9 +22,9 @@ GPIO.setup(GREEN_PIN, GPIO.OUT)
 GPIO.setup(BLUE_PIN, GPIO.OUT)
 
 def set_color(r,g,b):
-    GPIO.output(red_pin, r)
-    GPIO.output(green_pin, g)
-    GPIO.output(blue_pin, b)
+    GPIO.output(RED_PIN, r)
+    GPIO.output(GREEN_PIN, g)
+    GPIO.output(BLUE_PIN, b)
 
 def stream_handler(message):
     print("intra in functie")
