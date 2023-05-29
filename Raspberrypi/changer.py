@@ -21,10 +21,14 @@ GPIO.setup(RED_PIN, GPIO.OUT)
 GPIO.setup(GREEN_PIN, GPIO.OUT)
 GPIO.setup(BLUE_PIN, GPIO.OUT)
 
+red_pwm = GPIO.PWM(red_pin, 100)
+green_pwm = GPIO.PWM(green_pin, 100)
+blue_pwm = GPIO.PWM(blue_pin, 100)
+
 def set_color(r,g,b):
-    GPIO.output(RED_PIN, r)
-    GPIO.output(GREEN_PIN, g)
-    GPIO.output(BLUE_PIN, b)
+    red_pwm.start(red)
+    green_pwm.start(green)
+    blue_pwm.start(blue)
 
 def stream_handler(message):
     print("intra in functie")
@@ -33,6 +37,13 @@ def stream_handler(message):
         if message["path"] == "/":
             r,g,b = message["data"]["value"]
             print(r,g,b)
-            set_color(r/255, g/255, b/255)
+            set_color(r, g, b)
             
-my_stream = db.child("colors").stream(stream_handler)
+            
+while True:
+    try:
+        my_stream = db.child("colors").stream(stream_handler)
+        
+    except KeyboardInterrupt:
+        GPIO.cleanup()
+        break
