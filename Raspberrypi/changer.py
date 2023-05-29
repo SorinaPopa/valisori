@@ -21,9 +21,9 @@ GPIO.setup(RED_PIN, GPIO.OUT)
 GPIO.setup(GREEN_PIN, GPIO.OUT)
 GPIO.setup(BLUE_PIN, GPIO.OUT)
 
-red_pwm = GPIO.PWM(red_pin, 100)
-green_pwm = GPIO.PWM(green_pin, 100)
-blue_pwm = GPIO.PWM(blue_pin, 100)
+red_pwm = GPIO.PWM(RED_PIN, 100)
+green_pwm = GPIO.PWM(GREEN_PIN, 100)
+blue_pwm = GPIO.PWM(BLUE_PIN, 100)
 
 def set_color(r,g,b):
     red_pwm.start(red)
